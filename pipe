@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') { 
             steps { 
-                git branch: 'main', url: 'https://github.com/Nandareddy07/hello-maven.git' 
+                git branch: 'main', url: 'https://github.com/Varun-Yarmalli/hello.git' 
             } 
         } 
 
@@ -31,7 +31,7 @@ pipeline {
             steps { 
                 sh """ 
                 export ANSIBLE_HOST_KEY_CHECKING=False 
-                ansible-playbook -i /var/lib/jenkins/workspace/hello-maven/hosts.ini /var/lib/jenkins/workspace/hello-maven/deploy.yml --extra-vars='ansible_become_pass=exam@123' 
+                ansible-playbook -i /var/lib/jenkins/workspace/hello/hosts.ini /var/lib/jenkins/workspace/hello/deploy.yml --extra-vars='ansible_become_pass=exam@123' 
                 """ 
                 // Enter student password above 
             } 
