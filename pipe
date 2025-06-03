@@ -1,0 +1,40 @@
+pipeline { 
+    agent any 
+    
+    stages { 
+
+        stage('Checkout') { 
+            steps { 
+                git branch: 'main', url: 'https://github.com/Nandareddy07/hello-maven.git' 
+            } 
+        } 
+
+        stage('Build') { 
+            steps { 
+                sh 'mvn clean package' 
+            } 
+        }
+
+        stage('Test') { 
+            steps { 
+                sh 'mvn test' 
+            } 
+        } 
+
+        stage('Archive Artifacts') { 
+            steps { 
+                archiveArtifacts artifacts: '/home/external/t.jar', allowEmptyArchive: true 
+            } 
+        } 
+
+        stage('Deploy') { 
+            steps { 
+                sh """ 
+                export ANSIBLE_HOST_KEY_CHECKING=False 
+                ansible-playbook -i /var/lib/jenkins/workspace/hello-maven/hosts.ini /var/lib/jenkins/workspace/hello-maven/deploy.yml --extra-vars='ansible_become_pass=exam@123' 
+                """ 
+                // Enter student password above 
+            } 
+        } 
+    } 
+}
