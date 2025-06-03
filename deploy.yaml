@@ -7,4 +7,4 @@
     - name: Copy the artifact to the target location
       copy:
         src: "/var/lib/jenkins/workspace/hello/target/hello-maven-1.0-SNAPSHOT.jar"
-        dest: "/home/external/t.jar"
+        dest: "/home/sahana/Desktop/t.jar"
